@@ -23,7 +23,7 @@ This config is optimized for:
 ### 1. Clone Repository
 
 ```bash
-git clone <your-repo-url> ~/.dotfiles
+git clone https://github.com/Mo3oDev/arch-bootstrap-and-dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ```
 
@@ -75,6 +75,22 @@ The script will:
 6. Select **Hyprland** in SDDM login screen
 
 ## Troubleshooting
+
+### AUR build fails (alpm error)
+**Error**: `cannot find function 'alpm_option_set_disable_sandbox_filesystem'`
+
+**Fix**:
+```bash
+# Update pacman first
+sudo pacman -Sy
+sudo pacman -S --needed pacman
+
+# Then full system upgrade
+sudo pacman -Syu
+
+# Retry installation
+cd ~/.dotfiles && ./install.sh
+```
 
 ### Hyprland won't start
 ```bash

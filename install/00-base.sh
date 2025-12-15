@@ -7,8 +7,12 @@ set -e
 
 echo "📦 Installing official packages..."
 
-# Update system
-echo "  ↻ Updating system..."
+# Update system (pacman first, then everything else)
+echo "  ↻ Updating pacman and libalpm..."
+sudo pacman -Sy --noconfirm
+sudo pacman -S --needed --noconfirm pacman
+
+echo "  ↻ Updating entire system..."
 sudo pacman -Syu --noconfirm
 
 # Install packages from list
