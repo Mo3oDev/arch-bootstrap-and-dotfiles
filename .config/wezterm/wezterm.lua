@@ -30,7 +30,8 @@ config.default_prog = { 'nu' }
 config.enable_wayland = true
 
 -- ---- Performance ----
-config.front_end = "WebGpu"
+-- Use OpenGL instead of WebGpu (Vulkan issues on some AMD setups)
+config.front_end = "OpenGL"
 config.max_fps = 120
 
 -- ---- Keybinds ----
