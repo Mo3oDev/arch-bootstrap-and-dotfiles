@@ -10,11 +10,20 @@ echo "📦 Installing AUR helper and packages..."
 # Install paru if not present
 if ! command -v paru &> /dev/null; then
     echo "  🔨 Installing paru AUR helper..."
+
+    # Remove old build directory if exists
+    rm -rf /tmp/paru
+
+    # Clone and build
     cd /tmp
     git clone https://aur.archlinux.org/paru.git
     cd paru
     makepkg -si --noconfirm
-    cd -
+
+    # Cleanup
+    cd - > /dev/null
+    rm -rf /tmp/paru
+
     echo "  ✓ paru installed"
 else
     echo "  ✓ paru already installed"

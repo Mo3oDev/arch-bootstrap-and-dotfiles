@@ -11,8 +11,8 @@ echo "⚙️  Enabling services..."
 
 # Enable essential system services
 echo "  🔧 Enabling system services..."
-sudo systemctl enable sddm.service
-sudo systemctl enable NetworkManager.service
+sudo systemctl enable sddm.service 2>/dev/null || echo "    ✓ sddm already enabled"
+sudo systemctl enable NetworkManager.service 2>/dev/null || echo "    ✓ NetworkManager already enabled"
 
 # Configure SDDM
 echo "  🎨 Configuring SDDM (Corners theme)..."
@@ -28,9 +28,9 @@ fi
 
 # Enable user services
 echo "  🔧 Enabling user services..."
-systemctl --user enable pipewire.service
-systemctl --user enable pipewire-pulse.service
-systemctl --user enable wireplumber.service
+systemctl --user enable pipewire.service 2>/dev/null || echo "    ✓ pipewire already enabled"
+systemctl --user enable pipewire-pulse.service 2>/dev/null || echo "    ✓ pipewire-pulse already enabled"
+systemctl --user enable wireplumber.service 2>/dev/null || echo "    ✓ wireplumber already enabled"
 
 # Setup atuin if installed
 if command -v atuin &> /dev/null; then

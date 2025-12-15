@@ -17,21 +17,37 @@ if ! command -v stow &> /dev/null; then
     exit 1
 fi
 
-# Backup existing configs
-echo "  💾 Backing up existing configs to $BACKUP_DIR"
-mkdir -p "$BACKUP_DIR"
-
-for dir in hypr waybar wezterm nushell zellij mako zathura gtk-3.0; do
+# Backup existing configs (only if they exist and are not symlinks)
+NEEDS_BACKUP=false
+for dir in hypr waybar wezterm nushell zellij mako zathura gtk-3.0 sddm; do
     if [ -d "$HOME/.config/$dir" ] && [ ! -L "$HOME/.config/$dir" ]; then
-        echo "    ↻ Backing up ~/.config/$dir"
-        mv "$HOME/.config/$dir" "$BACKUP_DIR/"
+        NEEDS_BACKUP=true
+        break
     fi
 done
 
-# Backup starship.toml if exists and is not a symlink
 if [ -f "$HOME/.config/starship.toml" ] && [ ! -L "$HOME/.config/starship.toml" ]; then
-    echo "    ↻ Backing up ~/.config/starship.toml"
-    mv "$HOME/.config/starship.toml" "$BACKUP_DIR/"
+    NEEDS_BACKUP=true
+fi
+
+if [ "$NEEDS_BACKUP" = true ]; then
+    echo "  💾 Backing up existing configs to $BACKUP_DIR"
+    mkdir -p "$BACKUP_DIR"
+
+    for dir in hypr waybar wezterm nushell zellij mako zathura gtk-3.0 sddm; do
+        if [ -d "$HOME/.config/$dir" ] && [ ! -L "$HOME/.config/$dir" ]; then
+            echo "    ↻ Backing up ~/.config/$dir"
+            mv "$HOME/.config/$dir" "$BACKUP_DIR/" 2>/dev/null || true
+        fi
+    done
+
+    # Backup starship.toml if exists and is not a symlink
+    if [ -f "$HOME/.config/starship.toml" ] && [ ! -L "$HOME/.config/starship.toml" ]; then
+        echo "    ↻ Backing up ~/.config/starship.toml"
+        mv "$HOME/.config/starship.toml" "$BACKUP_DIR/" 2>/dev/null || true
+    fi
+else
+    echo "  ✓ No existing configs to backup"
 fi
 
 # Create .config directory if it doesn't exist
@@ -42,7 +58,20 @@ echo "  🔗 Creating symlinks with stow..."
 cd "$DOTFILES_DIR"
 
 # Stow will create symlinks for .config and scripts directories
-stow -v --restow --target="$HOME" .
+if ! stow -v --restow --target="$HOME" . 2>&1; then
+    echo ""
+    echo "⚠️  Stow conflicts detected. Options:"
+    echo "   1. Backup and retry:"
+    echo "      mv ~/.config ~/.config.backup.manual"
+    echo "      cd ~/.dotfiles && stow --restow ."
+    echo ""
+    echo "   2. Adopt existing files (merge with dotfiles):"
+    echo "      cd ~/.dotfiles && stow --adopt ."
+    echo "      git diff  # Review changes"
+    echo "      git restore .  # Restore if needed"
+    echo ""
+    exit 1
+fi
 
 # Make scripts executable
 echo "  🔐 Making scripts executable..."
