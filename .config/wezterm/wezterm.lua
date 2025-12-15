@@ -25,6 +25,10 @@ config.window_decorations = "RESIZE"
 -- ---- Shell ----
 config.default_prog = { 'nu' }
 
+-- ---- Wayland Backend ----
+-- Force Wayland backend (critical for Hyprland)
+config.enable_wayland = true
+
 -- ---- Performance ----
 config.front_end = "WebGpu"
 config.max_fps = 120

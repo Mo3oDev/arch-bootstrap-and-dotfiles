@@ -137,6 +137,30 @@ sudo reboot
 # If it works, the issue is SDDM configuration
 ```
 
+### WezTerm shows "XOpenDisplay failed" error
+
+**Symptoms**: `Error wezterm_gui > XOpenDisplay failed to open a display`
+
+**Cause**: Wayland environment variables not configured.
+
+**Fix**: This is now handled automatically by the installer. The config now:
+- Sets `QT_QPA_PLATFORM=wayland;xcb`
+- Sets `GDK_BACKEND=wayland,x11,*`
+- Sets `XDG_CURRENT_DESKTOP=Hyprland`
+- Exports variables to systemd user environment
+- Configures WezTerm to use Wayland backend
+
+**Verify in Hyprland session**:
+```bash
+# These should have values:
+echo $WAYLAND_DISPLAY  # Should show: wayland-1 or similar
+echo $XDG_CURRENT_DESKTOP  # Should show: Hyprland
+echo $QT_QPA_PLATFORM  # Should show: wayland;xcb
+
+# Test WezTerm
+wezterm start -- bash
+```
+
 **Debug logs**:
 ```bash
 cat ~/.hyprland/hyprland.log
