@@ -26,10 +26,12 @@ waybar
 hyprpicker
 wlsunset
 wlr-randr
+xdg-desktop-portal
 xdg-desktop-portal-hyprland
 xdg-desktop-portal-gtk
 qt5ct
 qt6ct
+seatd
 
 # ---- Display Manager ----
 sddm
@@ -46,6 +48,7 @@ wireplumber
 pavucontrol
 
 # ---- System Services ----
+dbus
 lxqt-policykit
 
 # ---- Idle Management ----

@@ -11,8 +11,15 @@ echo "⚙️  Enabling services..."
 
 # Enable essential system services
 echo "  🔧 Enabling system services..."
+sudo systemctl enable dbus.service 2>/dev/null || echo "    ✓ dbus already enabled"
+sudo systemctl enable seatd.service 2>/dev/null || echo "    ✓ seatd already enabled"
 sudo systemctl enable sddm.service 2>/dev/null || echo "    ✓ sddm already enabled"
 sudo systemctl enable NetworkManager.service 2>/dev/null || echo "    ✓ NetworkManager already enabled"
+
+# Add user to seat group (required for seatd/Wayland)
+echo "  👤 Adding user to 'seat' group..."
+sudo usermod -aG seat "$USER"
+echo "    ✓ User added to seat group"
 
 # Configure SDDM
 echo "  🎨 Configuring SDDM (Corners theme)..."

@@ -30,7 +30,7 @@ cd ~/.dotfiles
 ### 2. Review Package Lists
 
 ```bash
-cat packages/official.txt  # 46 official packages
+cat packages/official.txt  # 49 official packages
 cat packages/aur.txt       # 9 AUR packages
 ```
 
@@ -46,7 +46,8 @@ The script will:
 2. Install yay AUR helper
 3. Install AUR packages
 4. Create symlinks with GNU Stow (backups to `~/.config/backup_*`)
-5. Enable services (SDDM, NetworkManager, PipeWire, UFW)
+5. Enable services (dbus, seatd, SDDM, NetworkManager, PipeWire, UFW)
+6. Add user to 'seat' group (required for Wayland)
 
 ## Post-Install Required
 
@@ -92,10 +93,35 @@ sudo pacman -Syu
 cd ~/.dotfiles && ./install.sh
 ```
 
-### Hyprland won't start
+### Hyprland won't start / Login loop
+
+**Symptoms**: Authentication succeeds but returns to login screen immediately.
+
+**Cause**: Missing Wayland runtime dependencies.
+
+**Fix**: This is now handled automatically by the installer. If you installed before this fix:
+
+```bash
+# Install missing packages
+sudo pacman -S --needed dbus seatd xdg-desktop-portal
+
+# Enable services
+sudo systemctl enable dbus.service
+sudo systemctl enable seatd.service
+
+# Add user to seat group
+sudo usermod -aG seat $USER
+
+# Reboot
+sudo reboot
+```
+
+**Debug logs**:
 ```bash
 cat ~/.hyprland/hyprland.log
 journalctl -b -u sddm
+journalctl -b -u dbus
+journalctl -b -u seatd
 ```
 
 ### Stow conflicts

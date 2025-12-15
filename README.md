@@ -58,10 +58,15 @@ See [CONFIG.md](CONFIG.md) for complete list.
 
 ## Packages
 
-- **Official**: 46 packages (~2GB)
+- **Official**: 49 packages (~2GB)
 - **AUR**: 9 packages
 
 See `packages/official.txt` and `packages/aur.txt`
+
+**Critical Runtime Dependencies**:
+- `dbus` - Inter-process communication
+- `seatd` - Wayland seat management
+- `xdg-desktop-portal` - Desktop integration portals
 
 ## License
 
