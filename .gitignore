@@ -1,0 +1,50 @@
+# ============================================
+# GITIGNORE - Arch Linux Dotfiles
+# ============================================
+
+# ---- Backup Files ----
+*.swp
+*.swo
+*.swn
+*.bak
+*~
+*.backup
+
+# ---- OS Files ----
+.DS_Store
+Thumbs.db
+
+# ---- Cache & Temporary ----
+*.cache
+*.tmp
+*.log
+
+# ---- Personal Data ----
+# Add any files with sensitive/personal data here
+.env
+credentials.json
+secrets.yml
+
+# ---- Build Artifacts ----
+*.o
+*.so
+*.pyc
+__pycache__/
+
+# ---- IDE ----
+.vscode/
+.idea/
+*.sublime-*
+
+# ---- Nushell History ----
+.config/nushell/history.txt
+.config/nushell/history.sqlite*
+
+# ---- Zellij Sessions ----
+.config/zellij/sessions/
+
+# ---- Starship Cache ----
+.cache/starship/
+
+# ---- Wallpapers (optional - uncomment if you don't want to version wallpapers) ----
+# Pictures/Wallpapers/

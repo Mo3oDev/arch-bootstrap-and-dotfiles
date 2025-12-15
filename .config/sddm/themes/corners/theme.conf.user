@@ -1,0 +1,69 @@
+# Corners Theme Configuration - Catppuccin Mocha
+# This file customizes the corners theme to match Catppuccin Mocha
+
+[General]
+# Background image (leave empty for solid color)
+Background=""
+
+# Catppuccin Mocha Colors
+Background.Color="#1e1e2e"
+FormPosition="center"
+
+# Accent color (Mauve)
+AccentColor="#cba6f7"
+
+# Text colors
+OverrideLoginButtonTextColor="#cdd6f4"
+LoginButtonTextColor="#cdd6f4"
+
+# Font
+Font="JetBrainsMono Nerd Font"
+FontSize=10
+
+# Corner radius
+CornerRadius=8
+
+# Screen padding
+ScreenPadding=0
+
+# Popup
+PopupActiveColor="#cba6f7"
+PopupActiveTextColor="#1e1e2e"
+
+# Session button
+SessionButtonColor="#313244"
+SessionIconColor="#cdd6f4"
+
+# User button
+UserButtonColor="#313244"
+UserBorderColor="#cba6f7"
+UserBorderWidth=2
+UserIconColor="#cdd6f4"
+
+# Input fields
+PasswordFieldColor="#313244"
+PasswordFieldPlaceholderColor="#6c7086"
+PasswordFieldTextColor="#cdd6f4"
+PasswordFieldHighlightColor="#cba6f7"
+
+# Power menu
+PowerIconColor="#cdd6f4"
+PowerButtonColor="#313244"
+
+# Clock/Date
+DateColor="#cdd6f4"
+TimeColor="#cdd6f4"
+
+# Translations
+TranslatePlaceholderUsername="Username"
+TranslatePlaceholderPassword="Password"
+TranslateShowPassword="Show Password"
+TranslateLogin="Login"
+TranslateLoginFailedWarning="Login Failed"
+TranslateCapslockWarning="Caps Lock is on"
+TranslateSession="Session"
+TranslateSuspend="Suspend"
+TranslateHibernate="Hibernate"
+TranslateReboot="Reboot"
+TranslateShutdown="Shutdown"
+TranslateVirtualKeyboardButton="Virtual Keyboard"

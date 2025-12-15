@@ -1,0 +1,122 @@
+# ============================================
+# ARCH LINUX MINIMAL PACKAGES
+# ============================================
+
+# ---- Base Development ----
+base-devel
+git
+curl
+wget
+unzip
+python
+stow
+
+# ---- Text Editors ----
+neovim
+
+# ---- AMD Hardware Support ----
+amd-ucode
+mesa
+vulkan-radeon
+libva-mesa-driver
+
+# ---- Wayland / Hyprland ----
+hyprland
+waybar
+hyprpicker
+wlsunset
+wlr-randr
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+qt5ct
+qt6ct
+
+# ---- Display Manager ----
+sddm
+qt6-5compat
+qt6-declarative
+qt6-svg
+
+# ---- Network & Audio ----
+networkmanager
+pipewire
+pipewire-pulse
+pipewire-alsa
+wireplumber
+pavucontrol
+
+# ---- System Services ----
+lxqt-policykit
+
+# ---- Idle Management ----
+swayidle
+
+# ---- Notifications & Utilities ----
+mako
+wl-clipboard
+pamixer
+grim
+slurp
+
+# ---- Shell / Terminal ----
+wezterm
+bash
+nushell
+starship
+zellij
+
+# ---- File Manager & Apps ----
+nemo
+imv
+zathura
+zathura-pdf-mupdf
+gvfs
+tumbler
+
+# ---- Fonts ----
+ttf-jetbrains-mono-nerd
+
+# ---- Theme (GTK) ----
+# Note: catppuccin-gtk-theme-mocha is AUR
+
+# ---- Icons ----
+papirus-icon-theme
+
+# ---- CLI Utils (Optional but recommended) ----
+bat
+lsd
+ripgrep
+fd
+btop
+
+# ---- Launcher ----
+wofi
+
+# ---- Web Browsers ----
+firefox
+
+# ---- Multimedia ----
+ffmpeg
+gstreamer
+gst-plugins-base
+gst-plugins-good
+gst-plugins-bad
+gst-plugins-ugly
+mpv
+
+# ---- File System Support ----
+ntfs-3g
+exfatprogs
+dosfstools
+
+# ---- Qt Wayland Support ----
+qt5-wayland
+qt6-wayland
+
+# ---- System Utilities ----
+man-db
+man-pages
+htop
+
+# ---- Security ----
+ufw

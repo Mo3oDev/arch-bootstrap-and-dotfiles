@@ -1,0 +1,35 @@
+# ============================================
+# AUR PACKAGES
+# ============================================
+# These packages are NOT in official repos
+# and must be installed via AUR helper (paru)
+
+# ---- AUR Helper ----
+paru
+
+# ---- Hyprland Ecosystem ----
+hyprlock
+hyprshot
+swww
+
+# ---- Display Manager Theme ----
+sddm-theme-corners-git
+
+# ---- Shell & CLI ----
+atuin
+carapace-bin
+
+# ---- Clipboard Manager ----
+cliphist
+
+# ---- Web Browser ----
+brave-bin
+
+# ---- Development ----
+visual-studio-code-bin
+
+# ---- Theme ----
+catppuccin-gtk-theme-mocha
+
+# ---- Cursors ----
+bibata-cursor-theme

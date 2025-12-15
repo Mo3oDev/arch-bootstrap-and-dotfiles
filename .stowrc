@@ -1,0 +1,14 @@
+# ============================================
+# GNU STOW CONFIGURATION
+# ============================================
+# This configures GNU Stow to manage dotfiles symlinks
+#
+# Usage:
+#   cd ~/.dotfiles
+#   stow .
+#
+# This will create symlinks from ~/.dotfiles to ~
+
+--target=$HOME
+--verbose=2
+--no-folding

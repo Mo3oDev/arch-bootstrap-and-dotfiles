@@ -1,0 +1,38 @@
+# ============================================
+# Files and directories to ignore by GNU Stow
+# ============================================
+
+# Git
+.git
+.gitignore
+.gitmodules
+
+# Documentation
+README.md
+CLAUDE.md
+CONTRIBUTING.md
+LICENSE
+docs/
+
+# Editor configuration
+.editorconfig
+
+# Stow configuration
+.stowrc
+.stow-local-ignore
+
+# Installation scripts
+install.sh
+install/
+
+# Package lists
+packages/
+
+# Boot configuration (managed separately)
+boot/
+
+# Temporary & backup files
+*.bak
+*.tmp
+*.log
+*~

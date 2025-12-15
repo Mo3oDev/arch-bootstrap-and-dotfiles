@@ -1,0 +1,66 @@
+// ============================================
+// ZELLIJ CONFIGURATION - MINIMAL
+// ============================================
+
+// ---- Theme ----
+theme "catppuccin-mocha"
+
+// ---- UI Settings ----
+ui {
+    pane_frames {
+        rounded_corners true
+        hide_session_name false
+    }
+}
+
+// ---- Default Mode ----
+default_mode "normal"
+
+// ---- Keybindings ----
+keybinds {
+    normal {
+        // Pane navigation (Alt + hjkl)
+        bind "Alt h" { MoveFocus "Left"; }
+        bind "Alt l" { MoveFocus "Right"; }
+        bind "Alt j" { MoveFocus "Down"; }
+        bind "Alt k" { MoveFocus "Up"; }
+
+        // Pane management
+        bind "Alt n" { NewPane; }
+        bind "Alt x" { CloseFocus; }
+        bind "Alt f" { ToggleFocusFullscreen; }
+
+        // Tab navigation
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+
+        // New tab
+        bind "Alt t" { NewTab; }
+
+        // Detach session
+        bind "Alt d" { Detach; }
+    }
+
+    // Disable default Ctrl+g prefix
+    shared_except "locked" {
+        bind "Ctrl g" {}
+    }
+}
+
+// ---- Copy Mode ----
+copy_on_select true
+
+// ---- Mouse ----
+mouse_mode true
+
+// ---- Scroll Buffer ----
+scroll_buffer_size 10000
+
+// ---- Session ----
+default_shell "nu"
+
+// ---- Auto Layout ----
+simplified_ui false
