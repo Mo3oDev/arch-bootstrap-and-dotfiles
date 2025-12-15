@@ -8,11 +8,11 @@
 .gitmodules
 
 # Documentation
-README.md
-CLAUDE.md
-CONTRIBUTING.md
+README\.md
 LICENSE
-docs/
+INSTALL\.md
+CONFIG\.md
+POST-INSTALL\.md
 
 # Editor configuration
 .editorconfig
@@ -22,17 +22,17 @@ docs/
 .stow-local-ignore
 
 # Installation scripts
-install.sh
-install/
+install\.sh
+install
 
 # Package lists
-packages/
+packages
 
 # Boot configuration (managed separately)
-boot/
+boot
 
 # Temporary & backup files
-*.bak
-*.tmp
-*.log
-*~
+.*\.bak$
+.*\.tmp$
+.*\.log$
+.*~$
