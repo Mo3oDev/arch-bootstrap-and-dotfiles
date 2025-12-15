@@ -43,7 +43,7 @@ chmod +x install.sh
 
 The script will:
 1. Install official packages (pacman)
-2. Install Paru AUR helper
+2. Install yay AUR helper
 3. Install AUR packages
 4. Create symlinks with GNU Stow (backups to `~/.config/backup_*`)
 5. Enable services (SDDM, NetworkManager, PipeWire, UFW)

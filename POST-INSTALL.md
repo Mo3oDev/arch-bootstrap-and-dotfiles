@@ -134,7 +134,7 @@ hyprctl reload
 ### GTK Theme Not Applied
 ```bash
 # Install theme
-paru -S catppuccin-gtk-theme-mocha
+yay -S catppuccin-gtk-theme-mocha
 
 # Apply
 gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-Mocha-Standard-Mauve-Dark"
@@ -171,10 +171,10 @@ lspci | grep VGA
 
 ```bash
 # Update system
-paru -Syu
+yay -Syu
 
 # Clean cache
-paru -Sc
+yay -Sc
 
 # Update dotfiles
 cd ~/.dotfiles

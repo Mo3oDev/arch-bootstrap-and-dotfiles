@@ -2,10 +2,10 @@
 # AUR PACKAGES
 # ============================================
 # These packages are NOT in official repos
-# and must be installed via AUR helper (paru)
+# and must be installed via AUR helper (yay)
 
 # ---- AUR Helper ----
-paru
+# yay (installed automatically by 01-aur.sh)
 
 # ---- Hyprland Ecosystem ----
 hyprlock
