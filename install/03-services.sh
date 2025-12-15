@@ -25,6 +25,14 @@ echo "    ✓ User added to seat group"
 echo "  🎨 Configuring SDDM (Corners theme)..."
 sudo mkdir -p /etc/sddm.conf.d
 sudo cp "$DOTFILES_DIR/.config/sddm/sddm.conf.d/theme.conf" /etc/sddm.conf.d/
+
+# Configure SDDM greeter Hyprland config (CRITICAL for Wayland)
+echo "  🎨 Configuring SDDM Wayland greeter..."
+sudo mkdir -p /var/lib/sddm/.config/hypr
+sudo cp "$DOTFILES_DIR/.config/sddm/hyprland/hyprland.conf" /var/lib/sddm/.config/hypr/
+sudo chown -R sddm:sddm /var/lib/sddm/.config
+echo "    ✓ SDDM Wayland greeter configured"
+
 # Copy custom theme config if corners theme is installed
 if [ -d "/usr/share/sddm/themes/corners" ]; then
     sudo cp "$DOTFILES_DIR/.config/sddm/themes/corners/theme.conf.user" /usr/share/sddm/themes/corners/

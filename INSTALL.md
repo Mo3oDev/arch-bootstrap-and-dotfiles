@@ -97,10 +97,18 @@ cd ~/.dotfiles && ./install.sh
 
 **Symptoms**: Authentication succeeds but returns to login screen immediately.
 
-**Cause**: Missing Wayland runtime dependencies.
+**Causes**:
+1. Missing Wayland runtime dependencies
+2. SDDM not properly configured for Wayland/Hyprland
 
-**Fix**: This is now handled automatically by the installer. If you installed before this fix:
+**Fix**: This is now handled automatically by the installer. The script now:
+- Installs `dbus`, `seatd`, `xdg-desktop-portal`
+- Enables required services
+- Configures SDDM with `QT_WAYLAND_SHELL_INTEGRATION=layer-shell`
+- Creates Hyprland greeter config in `/var/lib/sddm/.config/hypr/`
+- Adds user to `seat` group
 
+**If you installed before this fix**:
 ```bash
 # Install missing packages
 sudo pacman -S --needed dbus seatd xdg-desktop-portal
@@ -112,8 +120,21 @@ sudo systemctl enable seatd.service
 # Add user to seat group
 sudo usermod -aG seat $USER
 
+# Configure SDDM for Wayland
+sudo mkdir -p /var/lib/sddm/.config/hypr
+sudo cp ~/.dotfiles/.config/sddm/hyprland/hyprland.conf /var/lib/sddm/.config/hypr/
+sudo chown -R sddm:sddm /var/lib/sddm/.config
+sudo cp ~/.dotfiles/.config/sddm/sddm.conf.d/theme.conf /etc/sddm.conf.d/
+
 # Reboot
 sudo reboot
+```
+
+**Test without SDDM**: If Hyprland works from TTY but not SDDM:
+```bash
+# Switch to TTY (Ctrl+Alt+F2)
+# Login and type: Hyprland
+# If it works, the issue is SDDM configuration
 ```
 
 **Debug logs**:
