@@ -19,6 +19,10 @@ sddm-theme-corners-git
 atuin
 carapace-bin
 
+# ---- Terminal ----
+# wezterm-git has better Hyprland/Wayland compatibility than official package
+wezterm-git
+
 # ---- Clipboard Manager ----
 cliphist
 

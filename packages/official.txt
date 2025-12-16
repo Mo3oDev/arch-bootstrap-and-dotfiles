@@ -62,7 +62,7 @@ grim
 slurp
 
 # ---- Shell / Terminal ----
-wezterm
+# wezterm (use wezterm-git from AUR for better Hyprland compatibility)
 bash
 nushell
 starship
@@ -78,6 +78,9 @@ tumbler
 
 # ---- Fonts ----
 ttf-jetbrains-mono-nerd
+noto-fonts
+noto-fonts-emoji
+noto-fonts-cjk
 
 # ---- Theme (GTK) ----
 # Note: catppuccin-gtk-theme-mocha is AUR

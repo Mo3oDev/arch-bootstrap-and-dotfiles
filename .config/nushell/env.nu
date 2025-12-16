@@ -37,6 +37,20 @@ $env.LESS = "-R"
 $env.FZF_DEFAULT_OPTS = "--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8,fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc,marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 # ---- Carapace Completion ----
-$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
-mkdir ~/.cache/nushell
-carapace _carapace nushell | save --force ~/.cache/nushell/carapace.nu
+# Generate carapace completions
+try {
+    $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
+    mkdir ~/.cache/nushell
+    carapace _carapace nushell | save --force ~/.cache/nushell/carapace.nu
+} catch {
+    # Carapace not available, skip
+}
+
+# Agent Socket Location
+$env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent.socket"
+
+let nvm_node_bin = $"($env.HOME)/.config/nvm/versions/node/v24.12.0/bin"
+
+if ($nvm_node_bin | path exists) {
+  $env.PATH = ($env.PATH | prepend $nvm_node_bin)
+}

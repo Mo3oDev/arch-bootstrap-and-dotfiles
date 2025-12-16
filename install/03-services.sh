@@ -38,7 +38,7 @@ if [ -d "/usr/share/sddm/themes/corners" ]; then
     sudo cp "$DOTFILES_DIR/.config/sddm/themes/corners/theme.conf.user" /usr/share/sddm/themes/corners/
     echo "    ✓ Corners theme configured with Catppuccin Mocha"
 else
-    echo "    ⚠️  Corners theme will be configured after paru installs it"
+    echo "    ⚠️  Corners theme will be configured after yay installs it"
 fi
 
 # Enable user services

@@ -23,7 +23,6 @@ $env.config = {
     }
 
     # Shell behavior
-    use_ls_colors: true
     rm: {
         always_trash: false
     }
@@ -37,12 +36,25 @@ $env.config = {
 }
 
 # ---- Starship Prompt ----
-mkdir ~/.cache/starship
-starship init nu | save -f ~/.cache/starship/init.nu
-use ~/.cache/starship/init.nu
+# Initialize starship prompt
+const starship_cache = "~/.cache/starship"
+const starship_init = "~/.cache/starship/init.nu"
+
+if not ($starship_cache | path expand | path exists) {
+    mkdir ($starship_cache | path expand)
+}
+if not ($starship_init | path expand | path exists) {
+    starship init nu | save -f ($starship_init | path expand)
+}
+source $starship_init
 
 # ---- Carapace Completion ----
-source ~/.cache/nushell/carapace.nu
+# Load carapace completions if available
+try {
+    source ~/.cache/nushell/carapace.nu
+} catch {
+    print "Warning: Carapace completions not found. They will be generated on next shell start."
+}
 
 # ---- Atuin (History) ----
 # Uncomment if atuin is installed
@@ -82,10 +94,10 @@ def --env conf [] {
 
 # System update
 def update [] {
-    paru -Syu
+    yay -Syu
 }
 
 # Clean package cache
 def clean [] {
-    paru -Sc
+    yay -Sc
 }

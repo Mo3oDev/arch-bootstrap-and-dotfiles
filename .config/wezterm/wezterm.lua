@@ -20,7 +20,9 @@ config.window_padding = {
 }
 
 config.window_background_opacity = 0.95
-config.window_decorations = "RESIZE"
+-- NONE = no decorations at all (use Hyprland to manage windows)
+-- RESIZE = invisible resize borders only, no title bar
+config.window_decorations = "NONE"
 
 -- ---- Shell ----
 config.default_prog = { 'nu' }
@@ -29,9 +31,13 @@ config.default_prog = { 'nu' }
 -- Force Wayland backend (critical for Hyprland)
 config.enable_wayland = true
 
+-- Disable multiplexer to avoid broken pipe issues
+config.unix_domains = {}
+config.default_gui_startup_args = { 'start', '--always-new-process' }
+
 -- ---- Performance ----
--- Use Software rendering (most compatible, slower but reliable)
-config.front_end = "Software"
+-- Use OpenGL rendering (better performance than Software)
+config.front_end = "OpenGL"
 config.max_fps = 60
 
 -- ---- Keybinds ----

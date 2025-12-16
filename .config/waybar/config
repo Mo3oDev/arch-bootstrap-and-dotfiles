@@ -68,7 +68,7 @@
         "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon}",
         "format-bluetooth-muted": " {icon}",
-        "format-muted": "婢",
+        "format-muted": " Muted",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -79,7 +79,9 @@
             "default": ["", "", ""]
         },
         "on-click": "pamixer -t",
-        "on-click-right": "pavucontrol"
+        "on-click-right": "pavucontrol",
+        "on-scroll-up": "pamixer -i 5",
+        "on-scroll-down": "pamixer -d 5"
     },
 
     "tray": {
