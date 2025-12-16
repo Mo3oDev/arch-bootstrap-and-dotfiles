@@ -2,182 +2,111 @@
 
 ## Prerequisites
 
-- Fresh Arch Linux installation with internet connection
-- User account with sudo privileges
-- System updated: `sudo pacman -Syu`
+- Fresh Arch Linux installation
+- Internet connection
+- User with sudo privileges
+- Updated system: `sudo pacman -Syu`
 
-### Hardware
+## Hardware Notes
 
-This config is optimized for:
-- AMD + RX
+Optimized for:
+- AMD CPU/GPU (RX series)
 - Dual 1920x1080 monitors
-- Colombia (Bogotá)
+- Desktop (no battery)
+- Colombia timezone (Bogotá)
 
-**For different hardware:**
-- NVIDIA GPU: Edit `packages/official.txt`, replace AMD packages with `nvidia nvidia-utils`
+**Different hardware:**
+- NVIDIA: Edit `packages/official.txt`, replace AMD packages with `nvidia nvidia-utils`
 - Intel CPU: Replace `amd-ucode` with `intel-ucode`
-- Laptop: Edit `.config/waybar/config` to enable battery module
+- Laptop: Enable battery module in `.config/waybar/config`
 
-## Installation
+## Installation Steps
 
-### 1. Clone Repository
-
+### 1. Clone repo
 ```bash
 git clone https://github.com/Mo3oDev/arch-bootstrap-and-dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ```
 
-### 2. Review Package Lists
-
+### 2. Review packages (optional)
 ```bash
-cat packages/official.txt  # 49 official packages
-cat packages/aur.txt       # 9 AUR packages
+cat packages/official.txt  # 49 packages
+cat packages/aur.txt       # 9 packages
 ```
 
-### 3. Run Installer
-
+### 3. Run installer
 ```bash
 chmod +x install.sh
 ./install.sh
 ```
 
-The script will:
-1. Install official packages (pacman)
-2. Install yay AUR helper
-3. Install AUR packages
-4. Create symlinks with GNU Stow (backups to `~/.config/backup_*`)
-5. Enable services (dbus, seatd, SDDM, NetworkManager, PipeWire, UFW)
-6. Add user to 'seat' group (required for Wayland)
+The script installs packages, creates symlinks, and enables services automatically.
 
-## Post-Install Required
-
-1. Edit `~/.config/hypr/hyprland.conf`:
-   - Monitor configuration (see CONFIG.md)
-   - wlsunset coordinates if not in Bogotá
-
-2. If dual boot: Configure systemd-boot (see POST-INSTALL.md)
-
-3. Get your root PARTUUID:
-   ```bash
-   lsblk -o NAME,PARTUUID
-   ```
-
-4. Edit boot entry:
-   ```bash
-   sudo nano /boot/loader/entries/arch.conf
-   # Replace XXXXXXXX... with your PARTUUID
-   ```
-
-5. Reboot:
-   ```bash
-   sudo reboot
-   ```
-
-6. Select **Hyprland** in SDDM login screen
-
-## Troubleshooting
-
-### AUR build fails (alpm error)
-**Error**: `cannot find function 'alpm_option_set_disable_sandbox_filesystem'`
-
-**Fix**:
+### 4. Configure monitors
 ```bash
-# Update pacman first
-sudo pacman -Sy
-sudo pacman -S --needed pacman
+# Find your monitors
+hyprctl monitors
 
-# Then full system upgrade
-sudo pacman -Syu
-
-# Retry installation
-cd ~/.dotfiles && ./install.sh
+# Edit config
+nano ~/.config/hypr/hyprland.conf
+# Update monitor= lines with your monitor names
 ```
 
-### Hyprland won't start / Login loop
+**Monitor examples:**
+```conf
+# Side by side
+monitor=DP-1,1920x1080@60,0x0,1        # Left
+monitor=DP-2,1920x1080@60,1920x0,1     # Right
 
-**Symptoms**: Authentication succeeds but returns to login screen immediately.
+# Different resolutions
+monitor=DP-1,2560x1440@144,0x0,1       # Primary
+monitor=DP-2,1920x1080@60,2560x0,1     # Secondary
+```
 
-**Causes**:
-1. Missing Wayland runtime dependencies
-2. SDDM not properly configured for Wayland/Hyprland
+### 5. Dual boot (optional)
 
-**Fix**: This is now handled automatically by the installer. The script now:
-- Installs `dbus`, `seatd`, `xdg-desktop-portal`
-- Enables required services
-- Configures SDDM with `QT_WAYLAND_SHELL_INTEGRATION=layer-shell`
-- Creates Hyprland greeter config in `/var/lib/sddm/.config/hypr/`
-- Adds user to `seat` group
+If you have dual boot with Windows:
 
-**If you installed before this fix**:
 ```bash
-# Install missing packages
-sudo pacman -S --needed dbus seatd xdg-desktop-portal
+# Get your root partition PARTUUID
+lsblk -o NAME,PARTUUID
 
-# Enable services
-sudo systemctl enable dbus.service
-sudo systemctl enable seatd.service
+# Edit boot entry
+sudo nano /boot/loader/entries/arch.conf
+# Replace PARTUUID placeholder with your actual PARTUUID
 
-# Add user to seat group
-sudo usermod -aG seat $USER
+# Copy boot configs
+sudo cp ~/.dotfiles/boot/loader/loader.conf /boot/loader/
+sudo cp ~/.dotfiles/boot/loader/entries/*.conf /boot/loader/entries/
 
-# Configure SDDM for Wayland
-sudo mkdir -p /var/lib/sddm/.config/hypr
-sudo cp ~/.dotfiles/.config/sddm/hyprland/hyprland.conf /var/lib/sddm/.config/hypr/
-sudo chown -R sddm:sddm /var/lib/sddm/.config
-sudo cp ~/.dotfiles/.config/sddm/sddm.conf.d/theme.conf /etc/sddm.conf.d/
+# Update bootloader
+sudo bootctl update
+```
 
-# Reboot
+### 6. Reboot
+```bash
 sudo reboot
 ```
 
-**Test without SDDM**: If Hyprland works from TTY but not SDDM:
+Select **Hyprland** in SDDM login screen.
+
+## Customization
+
+**Location (sunset/sunrise color temp):**
 ```bash
-# Switch to TTY (Ctrl+Alt+F2)
-# Login and type: Hyprland
-# If it works, the issue is SDDM configuration
+nano ~/.config/hypr/hyprland.conf
+# Find: exec-once = wlsunset -l 4.7110 -L -74.0721
+# Replace with your coordinates
 ```
 
-### WezTerm shows "XOpenDisplay failed" error
-
-**Symptoms**: `Error wezterm_gui > XOpenDisplay failed to open a display`
-
-**Cause**: Wayland environment variables not configured.
-
-**Fix**: This is now handled automatically by the installer. The config now:
-- Sets `QT_QPA_PLATFORM=wayland;xcb`
-- Sets `GDK_BACKEND=wayland,x11,*`
-- Sets `XDG_CURRENT_DESKTOP=Hyprland`
-- Exports variables to systemd user environment
-- Configures WezTerm to use Wayland backend
-
-**Verify in Hyprland session**:
+**Wallpapers:**
 ```bash
-# These should have values:
-echo $WAYLAND_DISPLAY  # Should show: wayland-1 or similar
-echo $XDG_CURRENT_DESKTOP  # Should show: Hyprland
-echo $QT_QPA_PLATFORM  # Should show: wayland;xcb
-
-# Test WezTerm
-wezterm start -- bash
+mkdir -p ~/Pictures/Wallpapers
+# Add images, then press SUPER+SHIFT+W to cycle
 ```
 
-**Debug logs**:
-```bash
-cat ~/.hyprland/hyprland.log
-journalctl -b -u sddm
-journalctl -b -u dbus
-journalctl -b -u seatd
-```
+## Package Info
 
-### Stow conflicts
-```bash
-cd ~/.dotfiles
-stow --adopt .  # Adopt existing files
-git restore .   # Restore dotfiles
-```
-
-### No internet
-```bash
-sudo systemctl enable --now NetworkManager
-nmcli device status
-```
+- **Official**: 49 packages (~2GB)
+- **AUR**: 9 packages
+- Lists in `packages/official.txt` and `packages/aur.txt`

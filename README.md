@@ -22,7 +22,7 @@ Optimized for:
 
 ```bash
 # 1. Clone
-git clone <your-repo-url> ~/.dotfiles
+git clone https://github.com/Mo3oDev/arch-bootstrap-and-dotfiles ~/.dotfiles
 cd ~/.dotfiles
 
 # 2. Install
