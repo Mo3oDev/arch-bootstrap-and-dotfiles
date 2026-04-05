@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================
-# wallpaper.sh - Set random wallpaper with swww
+# wallpaper.sh - Set random wallpaper with awww
 # ============================================
 
 set -e
@@ -15,10 +15,10 @@ if [ ! -d "$WALLPAPER_DIR" ]; then
     exit 1
 fi
 
-# Check if swww daemon is running
-if ! pgrep -x swww-daemon > /dev/null; then
-    echo "Starting swww daemon..."
-    swww-daemon &
+# Check if awww daemon is running
+if ! pgrep -x awww-daemon > /dev/null; then
+    echo "Starting awww daemon..."
+    awww-daemon &
     sleep 1
 fi
 
@@ -30,9 +30,9 @@ if [ -z "$WALLPAPER" ]; then
     exit 1
 fi
 
-# Set wallpaper with swww
+# Set wallpaper with awww
 echo "Setting wallpaper: $(basename "$WALLPAPER")"
-swww img "$WALLPAPER" --transition-type fade --transition-duration 2
+awww img "$WALLPAPER" --transition-type fade --transition-duration 2
 
 # Send notification
 notify-send -u low "Wallpaper Changed" "$(basename "$WALLPAPER")"

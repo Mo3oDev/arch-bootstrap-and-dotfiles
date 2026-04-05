@@ -46,6 +46,7 @@ echo "  🔧 Enabling user services..."
 systemctl --user enable pipewire.service 2>/dev/null || echo "    ✓ pipewire already enabled"
 systemctl --user enable pipewire-pulse.service 2>/dev/null || echo "    ✓ pipewire-pulse already enabled"
 systemctl --user enable wireplumber.service 2>/dev/null || echo "    ✓ wireplumber already enabled"
+systemctl --user enable cliphist-cleanup.service 2>/dev/null || echo "    ✓ cliphist-cleanup already enabled"
 
 # Setup atuin if installed
 if command -v atuin &> /dev/null; then

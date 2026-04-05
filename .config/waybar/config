@@ -55,13 +55,13 @@
     },
 
     "network": {
-        "format-wifi": "{essid} ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
+        "format-wifi": "WiFi ",
+        "format-ethernet": "Ethernet ",
+        "format-linked": "Link ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) "
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\nGW: {gwaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ifname}: {ipaddr}/{cidr}\nGW: {gwaddr}"
     },
 
     "pulseaudio": {

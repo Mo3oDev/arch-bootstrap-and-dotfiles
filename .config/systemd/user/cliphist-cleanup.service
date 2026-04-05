@@ -1,0 +1,14 @@
+[Unit]
+Description=Wipe cliphist database at session shutdown
+Before=shutdown.target
+Conflicts=shutdown.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/true
+RemainAfterExit=yes
+ExecStop=%h/.dotfiles/scripts/cliphist-cleanup.sh
+TimeoutStopSec=10
+
+[Install]
+WantedBy=default.target
