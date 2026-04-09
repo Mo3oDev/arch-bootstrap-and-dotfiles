@@ -50,7 +50,8 @@ sudo reboot
 - `SUPER + Return` → Terminal
 - `SUPER + D` → Launcher
 - `SUPER + E` → File Manager
-- `SUPER + L` → Lock Screen
+- `SUPER + Shift + L` → Lock Screen
+- `SUPER + Space` → Cambiar teclado (ES/US)
 - `SUPER + Q` → Close Window
 - `Print` → Screenshot
 
